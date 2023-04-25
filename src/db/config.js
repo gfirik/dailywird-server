@@ -1,5 +1,5 @@
 const dotenv = require("dotenv");
-dotenv.config({ path: ".env.dev" }); // need to change to .end.prod once its ready
+dotenv.config({ path: ".env" });
 
 const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;

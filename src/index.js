@@ -1,8 +1,9 @@
 const express = require("express");
+const app = express();
 const { connectToDB } = require("./db/connect.js");
 const { launchBot } = require("./bot/start.js");
+const userRouter = require("./routes/user.router.js");
 
-const app = express();
 async function startServer() {
   try {
     await connectToDB();
@@ -11,4 +12,13 @@ async function startServer() {
     console.error(err);
   }
 }
+
 startServer();
+
+app.use(express.json());
+app.use("/users", userRouter);
+
+const PORT = process.env.PORT || 4444;
+app.listen(PORT, async () => {
+  console.log(`Server listening on port ${PORT}`);
+});
