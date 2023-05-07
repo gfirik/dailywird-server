@@ -1,8 +1,10 @@
 const { Telegraf, Markup } = require("telegraf");
 const dotenv = require("dotenv");
-const User = require("../models/user.model.js");
 const { checkUserExists } = require("../services/checkUserExists.js");
 const { deleteTelegramUser } = require("../services/deleteUser.js");
+const {
+  createUserIfNotExists,
+} = require("../services/createUserIfNotExists.js");
 
 dotenv.config({ path: ".env" });
 const { TELEGRAM_BOT_TOKEN, CLIENT_HOST } = process.env;
@@ -30,9 +32,10 @@ async function launchBot() {
       ]);
 
       const userExists = await checkUserExists(telegramId);
+
       if (!userExists) {
-        const user = new User({ telegramId: telegramId });
-        await user.save();
+        const newUser = await createUserIfNotExists(telegramId);
+        console.log(`New user created with telegram id: ${newUser.telegramId}`);
         await ctx.reply(`Hey! ${first_name}! Welcome to DailyWird`, markup);
       } else {
         ctx.reply(`Hey! ${first_name}! Welcome Back!`, markup);
