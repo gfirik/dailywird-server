@@ -22,7 +22,6 @@ async function launchBot() {
 
       await deleteTelegramUser(id);
     });
-
     await bot.start(async (ctx) => {
       const { first_name } = await ctx.from;
       const telegramId = await ctx.from.id.toString();
@@ -41,7 +40,6 @@ async function launchBot() {
         ctx.reply(`Hey! ${first_name}! Welcome Back!`, markup);
       }
     });
-
     await bot.launch();
   } catch (error) {
     console.error("Error launching bot:", error);

@@ -38,7 +38,13 @@ async function createWird(req, res) {
   }
 }
 
-async function getWird(req, res) {}
+async function getWirds(req, res) {
+  try {
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+}
 
 async function editWird(req, res) {}
 
