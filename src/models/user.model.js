@@ -5,12 +5,13 @@ const UserSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   wirds: [
     {
-      mongoId: {
+      wirdId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Wird",
         required: true,
       },
-      telegramId: { type: String, required: true },
+      title: { type: String, required: true },
+      ownerTelegramId: { type: String, required: true },
     },
   ],
 });
