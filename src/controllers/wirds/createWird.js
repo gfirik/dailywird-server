@@ -1,5 +1,5 @@
-const Wird = require("../models/wird.model.js");
-const User = require("../models/user.model.js");
+const Wird = require("../../models/wird.model.js");
+const User = require("../../models/user.model.js");
 
 async function createWird(req, res) {
   try {
@@ -54,43 +54,4 @@ async function createWird(req, res) {
   }
 }
 
-async function getWirds(req, res) {
-  try {
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, error: "Internal Server Error" });
-  }
-}
-
-async function editWird(req, res) {}
-
-async function deleteWird(req, res) {
-  try {
-    const { wirdId } = req.body;
-    if (!wirdId) {
-      return res.status(400).json({ message: "Missing wird id" });
-    }
-
-    const deletedWird = await Wird.findByIdAndDelete(wirdId);
-
-    if (!deletedWird) {
-      return res.status(404).json({ message: "Wird not found" });
-    }
-
-    const updateResult = await User.updateOne(
-      { "wirds.wirdId": wirdId },
-      { $pull: { wirds: { wirdId } } }
-    );
-
-    if (updateResult.nModified === 0) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.json({ message: "Wird deleted successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-}
-
-module.exports = { createWird, deleteWird };
+module.exports = createWird;

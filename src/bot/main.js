@@ -1,7 +1,6 @@
 const { Telegraf, Markup } = require("telegraf");
 const dotenv = require("dotenv");
 const { checkUserExists } = require("../services/checkUserExists.js");
-const { deleteTelegramUser } = require("../services/deleteUser.js");
 const {
   createUserIfNotExists,
 } = require("../services/createUserIfNotExists.js");

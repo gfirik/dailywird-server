@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const { connectToDB } = require("./db/connect.js");
 const { launchBot } = require("./bot/main.js");
@@ -16,6 +17,7 @@ async function startServer() {
 
 startServer();
 
+app.use(cors());
 app.use(express.json());
 app.use("/users", userRouter);
 app.use("/wirds", wirdRouter);
