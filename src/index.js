@@ -1,8 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+
 const { connectToDB } = require("./db/connect.js");
 const { launchBot } = require("./bot/main.js");
+
 const userRouter = require("./routes/user.router.js");
 const wirdRouter = require("./routes/wird.router.js");
 

@@ -1,3 +1,4 @@
+const User = require("../../models/user.model.js");
 const Wird = require("../../models/wird.model.js");
 
 async function getWirds(req, res) {
@@ -5,6 +6,11 @@ async function getWirds(req, res) {
     const { telegramid } = req.headers;
     if (!telegramid) {
       return res.status(400).json({ message: "Missing telegramid header" });
+    }
+
+    const user = await User.findOne({ telegramId: telegramid });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
 
     const wirds = await Wird.find({ "owner.telegramId": telegramid });
