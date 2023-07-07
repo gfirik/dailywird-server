@@ -35,6 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["mongodb", "virtual:8eaca0f5998876b1f172e8935fb02ae5d8f974730e5a522a041e4ade483d18455e30a2a41c4a09d54408877987b86ea3e7a4f4fe143fc92d3dd1a98526547624#npm:5.3.0"],\
             ["mongoose", "npm:7.0.4"],\
             ["nodemon", "npm:2.0.22"],\
+            ["prettier", "npm:3.0.0"],\
             ["telegraf", "npm:4.12.2"]\
           ],\
           "linkType": "SOFT"\
@@ -496,6 +497,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["mongodb", "virtual:8eaca0f5998876b1f172e8935fb02ae5d8f974730e5a522a041e4ade483d18455e30a2a41c4a09d54408877987b86ea3e7a4f4fe143fc92d3dd1a98526547624#npm:5.3.0"],\
             ["mongoose", "npm:7.0.4"],\
             ["nodemon", "npm:2.0.22"],\
+            ["prettier", "npm:3.0.0"],\
             ["telegraf", "npm:4.12.2"]\
           ],\
           "linkType": "SOFT"\
@@ -1716,6 +1718,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/picomatch-npm-2.3.1-c782cfd986-050c865ce8.zip/node_modules/picomatch/",\
           "packageDependencies": [\
             ["picomatch", "npm:2.3.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["prettier", [\
+        ["npm:3.0.0", {\
+          "packageLocation": "./.yarn/cache/prettier-npm-3.0.0-7ffbcce680-6a832876a1.zip/node_modules/prettier/",\
+          "packageDependencies": [\
+            ["prettier", "npm:3.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
