@@ -1,5 +1,6 @@
 const Wird = require("../../models/wird.model.js");
 const User = require("../../models/user.model.js");
+const { generateInstances } = require("../../services/generateInstances.js");
 
 async function createWird(req, res) {
   try {
@@ -11,7 +12,7 @@ async function createWird(req, res) {
     const {
       title,
       description,
-      repeatDay,
+      repeatDays,
       repeatWeekly,
       startDate,
       remindOnStart,
@@ -20,23 +21,34 @@ async function createWird(req, res) {
       counter,
     } = req.body;
 
+    const user = await User.findOne({ telegramId: telegramid });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const userTimeZone = user.timeZone || "UTC";
+
+    const instances = generateInstances(
+      startDate,
+      repeatDays,
+      repeatWeekly,
+      userTimeZone
+    );
+
     const wird = await Wird.create({
       title,
       description,
-      repeatDay,
+      repeatDays,
       repeatWeekly,
       startDate,
       remindOnStart,
       completionDate,
       remindOnCompleted,
+      completed: false,
       counter,
       owner: { telegramId: telegramid },
+      instances,
     });
-    const user = await User.findOne({ telegramId: telegramid });
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
 
     user.wirds.push({
       wirdId: wird._id,

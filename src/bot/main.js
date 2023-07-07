@@ -20,7 +20,6 @@ async function launchBot() {
     await bot.start(async (ctx) => {
       const { first_name } = await ctx.from;
       const telegramId = await ctx.from.id.toString();
-
       const markup = Markup.inlineKeyboard([
         [Markup.button.webApp("DailyWird", CLIENT_HOST)],
       ]);
@@ -28,7 +27,8 @@ async function launchBot() {
       const userExists = await checkUserExists(telegramId);
 
       if (!userExists) {
-        const newUser = await createUserIfNotExists(telegramId);
+        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const newUser = await createUserIfNotExists(telegramId, userTimeZone);
         console.log(`New user created with telegram id: ${newUser.telegramId}`);
         await ctx.reply(`Hey! ${first_name}! Welcome to DailyWird`, markup);
       } else {
@@ -40,6 +40,7 @@ async function launchBot() {
     // but should not be deleted before that as it will be used to test performance
     await bot.on("message", async (ctx) => {
       const telegramId = await ctx.from.id.toString();
+      console.log(ctx.message);
 
       try {
         setTimeout(() => {

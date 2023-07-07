@@ -1,20 +1,23 @@
 const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
-  telegramId: { type: String, required: true, unique: true },
-  createdAt: { type: Date, default: Date.now },
-  wirds: [
-    {
-      wirdId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Wird",
-        required: true,
+const UserSchema = new mongoose.Schema(
+  {
+    telegramId: { type: String, required: true, unique: true },
+    timezone: { type: String, default: "UTC", required: true },
+    wirds: [
+      {
+        wirdId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Wird",
+          required: true,
+        },
+        title: { type: String, required: true },
+        ownerTelegramId: { type: String, required: true },
       },
-      title: { type: String, required: true },
-      ownerTelegramId: { type: String, required: true },
-    },
-  ],
-});
+    ],
+  },
+  { timestamps: true }
+);
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;
