@@ -1,14 +1,5 @@
 const mongoose = require("mongoose");
-
-const daysOfWeek = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+const { daysOfWeek } = require("../types/weekdays.js");
 
 const WirdSchema = new mongoose.Schema(
   {

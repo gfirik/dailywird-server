@@ -1,34 +1,40 @@
 const moment = require("moment-timezone");
+const { daysOfWeek } = require("../types/weekdays.js");
 
 function generateInstances(startDate, repeatDays, repeatWeekly, userTimeZone) {
   // Validations
   const validatedStartDate = new Date(startDate);
+
   if (!moment(validatedStartDate).isValid()) {
-    throw new Error("startDate must be a valid Date object.");
+    return { error: "startDate must be a valid Date object." };
   }
 
-  if (!Array.isArray(repeatDays) || repeatDays.length === 0) {
-    throw new Error("repeatDays must be a non-empty array.");
+  if (!Array.isArray(repeatDays)) {
+    return { error: "repeatDays must be an array." };
   }
 
-  for (const day of repeatDays) {
-    if (typeof day !== "string") {
-      throw new Error("Each repeatDay must be a string.");
+  if (repeatDays.length > 0) {
+    for (const day of repeatDays) {
+      if (typeof day !== "string") {
+        return { error: "Each repeatDay must be a string." };
+      }
+      if (!daysOfWeek.includes(day)) {
+        return { error: `${day} is not a valid weekday name.` };
+      }
     }
   }
 
   if (typeof repeatWeekly !== "boolean") {
-    throw new Error("repeatWeekly must be a boolean value.");
+    return { error: "repeatWeekly must be a boolean value." };
   }
 
   if (typeof userTimeZone !== "string") {
-    throw new Error("userTimeZone must be a string.");
+    return { error: "userTimeZone must be a string." };
   }
   // End of validations
 
   const instances = [];
   const userMoment = moment.tz(validatedStartDate, userTimeZone);
-
   let currentDate = userMoment.clone();
   const maxDuration = 365;
 

@@ -21,8 +21,8 @@ startServer();
 
 app.use(cors());
 app.use(express.json());
-app.use("/users", userRouter);
-app.use("/wirds", wirdRouter);
+app.use("/v1/users", userRouter);
+app.use("/v1/wirds", wirdRouter);
 
 const PORT = process.env.PORT || 4444;
 app.listen(PORT, async () => {
