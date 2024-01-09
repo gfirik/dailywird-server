@@ -4,8 +4,6 @@ const { MONGODB_URI } = require("./config.js");
 async function connectToDB() {
   try {
     await mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
       connectTimeoutMS: 30000,
     });
 

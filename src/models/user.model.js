@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema(
   {
     telegramId: { type: String, required: true, unique: true },
-    timezone: { type: String, default: "UTC", required: true },
     wirds: [
       {
         wirdId: {
